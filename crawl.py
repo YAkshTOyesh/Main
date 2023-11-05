@@ -7,7 +7,7 @@ import urllib.request
 driver = webdriver.Chrome()
 driver.get("https://www.google.co.kr/imghp?hl=ko&tab=wi&authuser=0&ogbl")
 elem = driver.find_element(By.NAME, "q")
-elem.send_keys("Shades of red") #Name for search
+elem.send_keys("Donut") #Name for search
 elem.send_keys(Keys.RETURN)
 
 SCROLL_PAUSE_TIME = 1
@@ -29,7 +29,7 @@ count = 1
 for image in images_subset:
     try:
         image.click()
-        time.sleep(2)
+        time.sleep(1.5)
         imgUrl = driver.find_element(By.XPATH, '//*[@id="Sva75c"]/div[2]/div[2]/div[2]/div[2]/c-wiz/div/div/div/div[3]/div[1]/a/img[1]').get_attribute("src")
         opener=urllib.request.build_opener()
         opener.addheaders=[('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
