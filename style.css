@@ -1,10 +1,29 @@
+.section {
+    margin-top: 50px;
+    text-align: center;
+}
+
 body {
-    font-family: sans-serif;
-    background-color: #eeeeee;
+    font-family: 'Jua', sans-serif;
+    background-color: #d1a8e9;
+}
+
+.title {
+    font-family: 'Jua', sans-serif;
+    line-height: 1.67;
+    text-align: center;
+}
+
+.subtitle {
+    font-family: 'Jua', sans-serif;
+    line-height: 1.53;
+    text-align: center;
+    color: #35465d;
+    margin-bottom: 5%;
 }
 
 .file-upload {
-    background-color: #ffffff;
+    background-color: #aa75c9;
     width: 600px;
     margin: 0 auto;
     padding: 20px;
@@ -13,6 +32,7 @@ body {
 .file-upload-content {
     display: none;
     text-align: center;
+    margin-bottom: 30%;
 }
 
 .file-upload-input {
@@ -27,14 +47,13 @@ body {
 }
 
 .image-upload-wrap {
-    margin-top: 20px;
-    border: 4px dashed #1FB264;
+    border: 4px dashed #831fb2;
     position: relative;
 }
 
 .image-dropping,
 .image-upload-wrap:hover {
-    background-color: #1FB264;
+    background-color: #d1a8e9;
     border: 4px dashed #ffffff;
 }
 
@@ -48,10 +67,11 @@ body {
 }
 
 .drag-text h3 {
-    font-weight: 100;
     text-transform: uppercase;
-    color: #15824B;
+    color: #ffffff;
     padding: 60px 0;
+    font-family: 'Varela Round';
+    font-weight: bold;
 }
 
 .file-upload-image {
@@ -61,35 +81,47 @@ body {
     padding: 20px;
 }
 
-.remove-image {
-    width: 200px;
-    margin: 0;
+.animated.bounce {
+    font-family: 'Varela Round';
+    font-size: 2rem;
+    font-weight: bold;
+    color:rgb(54, 12, 45)
+}
+
+.try-again-text-wrap {
+    padding: 0 15px 15px 15px;
+    color: #222;
+}
+
+.try-again-btn {
+    width: 60%;
+    margin-top: 5%;
     color: #fff;
-    background: #cd4535;
-    border: none;
+    background: #35465d;
+    border: solid 1.5px #35465d;
     padding: 10px;
-    border-radius: 4px;
-    border-bottom: 4px solid #b02818;
+    border-radius: 40px;
+    border-bottom: 4px solid #202833;
     transition: all .2s ease;
     outline: none;
     text-transform: uppercase;
     font-weight: 700;
 }
 
-.remove-image:hover {
-    background: #c13b2a;
+.try-again-btn:hover {
+    background: #35465d;
     color: #ffffff;
     transition: all .2s ease;
     cursor: pointer;
 }
 
-.remove-image:active {
+.try-again-btn:active {
     border: 0;
     transition: all .2s ease;
 }
 
 .footer {
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
     left: 0;
@@ -101,4 +133,88 @@ body {
 .footer p {
     font-weight: 50;
     color: #ffffff;
+}
+
+.footer a {
+    color: #ffffff;
+    transition: opacity 2s;
+}
+
+.footer a:hover {
+    color: #ffffff;
+}
+
+.footer a:visited {
+    color: #ffffff;
+}
+
+.footer a:active {
+    color: #ffffff;
+}
+
+.result-message {
+    font-family: 'Varela Round';
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.color-explain {
+    font-size: 1.5rem;
+}
+
+
+.Red-color-title {
+    color: #ff0000;
+}
+
+.Orange-color-title {
+    color: #FFA500;
+}
+
+.Yellow-color-title {
+    color: #FFFF00;
+}
+
+.Green-color-title {
+    color: #008000;
+}
+
+.Blue-color-title {
+    color: #0000FF;
+}
+
+.Navy-color-title {
+    color: #000080;
+}
+
+.Purple-color-title {
+    color: #800080;
+}
+
+.Black-color-title {
+    color: #000000;
+}
+
+.White-color-title {
+    color: #FFFFFF;
+}
+
+.Gray-color-title {
+    color: #808080;
+}
+
+.Pink-color-title {
+    color: #FF00FF;
+}
+
+.Mint-color-title {
+    color: #008080;
+}
+
+.Skybue-color-title {
+    color: #00FFFF;
+}
+
+.Brown-color-title {
+    color: rgb(91, 50, 7);
 }

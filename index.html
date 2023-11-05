@@ -6,33 +6,245 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>COTD</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'
+        href='https://fonts.googleapis.com/css?family=Varela Round'>
     <script src='main.js'></script>
 </head>
 
-<body>
-    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <div class="file-upload">
-        <div class="image-upload-wrap">
-            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-            <div class="drag-text">
-                <h3>Drag and drop a file or select add Image</h3>
-            </div>
-        </div>
-        <div class="file-upload-content">
-            <img class="file-upload-image" src="#" alt="your image" />
-            <div class="image-title-wrap">
-                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
-                        class="image-title">Uploaded Image</span></button>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <p>
-            Copyright by <strong>Buccaneers</strong>. 2023
-        </p>
-    </div>
+<section class="section">
 
-</body>
+    <body>
+        <h1 class="title">
+            <style>
+                .colored-text span {
+                    display: inline-block;
+                }
+
+                .colored-text span:nth-child(1) {
+                    color: #ff0000;
+                }
+
+                .colored-text span:nth-child(2) {
+                    color: #FFA500;
+                }
+
+                .colored-text span:nth-child(3) {
+                    color: #FFFF00;
+                }
+
+                .colored-text span:nth-child(4) {
+                    color: #008000;
+                }
+
+                .colored-text span:nth-child(5) {
+                    color: #0000FF;
+                }
+
+                /* .colored-text span:nth-child(6) {
+                    color: blue;
+                } */
+                .colored-text span:nth-child(7) {
+                    color: #000080;
+                }
+
+                .colored-text span:nth-child(8) {
+                    color: #800080;
+                }
+
+                /* .colored-text span:nth-child(9) {
+                    color: blue;
+                } */
+                .colored-text span:nth-child(10) {
+                    color: red;
+                }
+
+                .colored-text span:nth-child(11) {
+                    color: #FFA500;
+                }
+
+                .colored-text span:nth-child(12) {
+                    color: #FFFF00;
+                }
+
+                /* .colored-text span:nth-child(13) {
+                    color: red;
+                } */
+                .colored-text span:nth-child(14) {
+                    color: #008000;
+                }
+
+                .colored-text span:nth-child(15) {
+                    color: gre#0000FF;
+                }
+
+                .colored-text span:nth-child(16) {
+                    color: #000080;
+                }
+            </style>
+
+            <div class="colored-text">
+                <span>C</span>
+                <span>O</span>
+                <span>L</span>
+                <span>O</span>
+                <span>R</span>
+                <span> </span>
+                <span>O</span>
+                <span>F</span>
+                <span> </span>
+                <span>T</span>
+                <span>H</span>
+                <span>E</span>
+                <span> </span>
+                <span>D</span>
+                <span>A</span>
+                <span>Y</span>
+            </div>
+        </h1>
+        <h2 class="subtitle">What Should I wear Today?</h2>
+        <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <div class="file-upload">
+            <div class="image-upload-wrap">
+                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                <div class="drag-text">
+                    <h3>Drag and drop a file or select add Image</h3>
+                </div>
+            </div>
+            <div class="file-upload-content">
+                <img class="file-upload-image" id="color" src="#" alt="your image" />
+                <div id="loading" class="animated bounce">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="text-center">AI is finding your color</p>
+                </div>
+                <p class="result-message"></p>
+                <div id="label-container" class="d-flex flex-column justify-content-around"></div>
+                <div id="addThis" class="addthis_inline_share_toolbox"></div>
+
+                <div class="pt-3 image-title-wrap">
+                    <button type="button p-2" class="try-again-btn" onclick="window.location.reload()">
+                        <span class="try-again-text">Try with another image</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+        <script type="text/javascript">
+            // More API functions here:
+            // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+            // the link to your model provided by Teachable Machine export panel
+            const URL = "https://teachablemachine.withgoogle.com/models/OsoI2szle/";
+
+            let model, webcam, labelContainer, maxPredictions;
+
+            // Load the image model and setup the webcam
+            async function init() {
+                const modelURL = URL + "model.json";
+                const metadataURL = URL + "metadata.json";
+
+                // load the model and metadata
+                // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+                // or files from your local hard drive
+                // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+                labelContainer = document.getElementById("label-container");
+                for (let i = 0; i < maxPredictions; i++) { // and class labels
+                    labelContainer.appendChild(document.createElement("div"));
+                }
+            }
+
+
+            // run the webcam image through the image model
+            async function predict() {
+                // predict can take in an image, video or canvas html element
+                var image = document.getElementById("color");
+                const prediction = await model.predict(image, false);
+                prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+                console.log(prediction[0].className);
+                var resultMessage;
+                var resultExpain;
+                switch (prediction[0].className) {
+                    case "Red":
+                        resultMessage = "Red"
+                        resultExplain = ""
+                        break;
+                    case "Orange":
+                        resultMessage = "Orange"
+                        resultExplain = ""
+                        break;
+                    case "Yellow":
+                        resultMessage = "Yellow"
+                        resultExplain = ""
+                        break;
+                    case "Green":
+                        resultMessage = "Green"
+                        resultExplain = ""
+                        break;
+                    case "Blue":
+                        resultMessage = "Blue"
+                        resultExplain = ""
+                        break;
+                    case "Navy":
+                        resultMessage = "Navy"
+                        resultExplain = ""
+                        break;
+                    case "Purple":
+                        resultMessage = "Purple"
+                        resultExplain = ""
+                        break;
+                    case "Black":
+                        resultMessage = "Black"
+                        resultExplain = ""
+                        break;
+                    case "White":
+                        resultMessage = "White"
+                        resultExplain = ""
+                        break;
+                    case "Gray":
+                        resultMessage = "Gray"
+                        resultExplain = ""
+                        break;
+                    case "Pink":
+                        resultMessage = "Pink"
+                        resultExplain = ""
+                        break;
+                    case "Skybue":
+                        resultMessage = "Skyblue"
+                        resultExplain = ""
+                        break;
+                    case "Brown":
+                        resultMessage = "Brown"
+                        resultExplain = "Black is the good match for the brown"
+                        break;
+                    case "Mint":
+                        resultMessage = "Mint"
+                        resultExplain = ""
+                        break;
+                    default:
+                        resultMessage = "Can't Predict"
+                        resultExplain = ""
+                }
+                var title = "<div class='" + prediction[0].className + "-color-title'>" + resultMessage + "</div>"
+                var explain = "<div class='color-explain pt-2'>" + resultExplain + "</div>"
+                $('.result-message').html(title + explain)
+                for (let i = 0; i < maxPredictions; i++) {
+                    const classPrediction =
+                        prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                    labelContainer.childNodes[i].innerHTML = classPrediction;
+                }
+            }
+        </script>
+
+        <footer class="footer pt-5 container d-flex justify-content-center">
+            <p>&copy; <a href="https://gdsc.community.dev/beloit-college/">Buccaneers</a> 2023. All Rights Reserved. </p>
+        </footer>
+
+    </body>
+</section>
 
 </html>
