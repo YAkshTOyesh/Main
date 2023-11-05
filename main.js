@@ -5,10 +5,9 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('.image-upload-wrap').hide();
-
+            $('#loading').show();
             $('.file-upload-image').attr('src', e.target.result);
             $('.file-upload-content').show();
-
             $('.image-title').html(input.files[0].name);
         }
 
@@ -16,6 +15,7 @@ function readURL(input) {
         init().then(() => {
             console.log("now predict")
             predict();
+            $('#loading').hide();
         });
     } else {
         removeUpload();
