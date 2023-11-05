@@ -102,3 +102,20 @@ body {
     font-weight: 50;
     color: #ffffff;
 }
+
+.footer a {
+    color: #ffffff;
+    transition: opacity 2s;
+}
+
+.footer a:hover {
+    color: #ffffff;
+}
+ 
+.footer a:visited {
+    color: #ffffff;
+}
+
+.footer a:active {
+    color: #ffffff;
+}
