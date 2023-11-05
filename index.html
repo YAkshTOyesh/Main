@@ -119,8 +119,15 @@
                     <p class="text-center">AI is finding your color</p>
                 </div>
                 <p class="result-message"></p>
-                <div id="label-container" class="d-flex flex-column justify-content-around"></div>
-                <div id="addThis" class="addthis_inline_share_toolbox"></div>
+                <div id="label-container" class="d-flex flex-column justify-content-around">
+                </div>
+                <div id="bar-chart"></div>
+                <script src="https://d3js.org/d3.v6.min.js"></script>
+                <!-- <div id="bar-chart"></div>
+                <script src="https://d3js.org/d3.v6.min.js"></script>
+                <script src="main_test3.js"></script>
+                <link rel="stylesheet" type="text/css" href="styles_test3.css">
+                <div id="addThis" class="addthis_inline_share_toolbox"></div> -->
 
                 <div class="pt-3 image-title-wrap">
                     <button type="button p-2" class="try-again-btn" onclick="window.location.reload()">
@@ -129,9 +136,10 @@
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js">
+        </script>
         <script type="text/javascript">
             // More API functions here:
             // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
@@ -164,6 +172,7 @@
                 // predict can take in an image, video or canvas html element
                 var image = document.getElementById("color");
                 const prediction = await model.predict(image, false);
+                const color_assign = prediction.slice()
                 prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
                 console.log(prediction[0].className);
                 var resultMessage;
@@ -171,35 +180,35 @@
                 switch (prediction[0].className) {
                     case "Red":
                         resultMessage = "Red"
-                        resultExplain = ""
+                        resultExplain = "In a world filled with colors, where RED ignites passion,and BLACK adds mystery, we bring you the warm embrace of BROWN. \nExperience the soothing calmness of GREEN, and the endless possibilities of BLUE."
                         break;
                     case "Orange":
                         resultMessage = "Orange"
-                        resultExplain = ""
+                        resultExplain = "ORANGE - the color of energy and enthusiasm, beckons you to embrace its vibrant spirit.\nPaired with the soothing serenity of BLUE, the freshness of GREEN, the purity of WHITE, and the understated elegance of GRAY, it creates a harmonious blend of colors."
                         break;
                     case "Yellow":
                         resultMessage = "Yellow"
-                        resultExplain = ""
+                        resultExplain = "YELLOW - the color of sunshine and optimism, invites you to bask in its warm glow.\nComplement it with the soft charm of PINK, the regal allure of PURPLE, the serenity of BLUE, the enigmatic charm of BLACK, and the earthy warmth of BROWN."
                         break;
                     case "Green":
                         resultMessage = "Green"
-                        resultExplain = ""
+                        resultExplain = "Embrace the vibrant GREEN of life as it intertwines with the purity of WHITE.\n Witness the earthy warmth of LIGHT BROWN grounding you, while the mysterious allure of BLACK adds depth. \n Find serenity in the calming shade of GRAY, and let your dreams take flight in the endless expanse of BLUE."
                         break;
                     case "Blue":
                         resultMessage = "Blue"
-                        resultExplain = ""
+                        resultExplain = "BLUE - the color of serenity and calm, welcomes you to a world of endless possibilities.\nPair it with the enigma of BLACK, the purity of WHITE, the brightness of YELLOW, the warmth of BROWN, and the passion of RED."
                         break;
                     case "Navy":
                         resultMessage = "Navy"
-                        resultExplain = ""
+                        resultExplain = "NAVY - the color of deep waters and classic elegance, invites you to dive into a world of timeless charm.\nPaired with the pure simplicity of WHITE, the understated sophistication of GRAY, the refreshing coolness of MINT, the soft tenderness of PINK, and the fiery passion of RED, it creates a captivating tapestry of colors."
                         break;
                     case "Purple":
                         resultMessage = "Purple"
-                        resultExplain = ""
+                        resultExplain = "PURPLE - the color of royalty and creativity, invites you to immerse yourself in a world of regal charm. \nComplement it with the timeless elegance of GRAY, the earthy warmth of BROWN, the soft tenderness of PINK, the calming serenity of BLUE, and the pure simplicity of WHITE."
                         break;
                     case "Black":
                         resultMessage = "Black"
-                        resultExplain = ""
+                        resultExplain = "BLACK - The embodiment of mystery and elegance, it's like diving into the depths of a starry night. \nPair it with the calming BLUE, the understated sophistication of GREY, the classic charm of NAVY, the fiery passion of RED, and the pure simplicity of WHITE. Together, they create a symphony of contrasts."
                         break;
                     case "White":
                         resultMessage = "White"
@@ -207,19 +216,19 @@
                         break;
                     case "Gray":
                         resultMessage = "Gray"
-                        resultExplain = ""
+                        resultExplain = "GREY - A color that blends into any environment, it symbolizes versatility and balance. \n Pair it with the pure simplicity of WHITE, the calming BLUE, the soft tenderness of PINK, and the warmth of YELLOW. "
                         break;
                     case "Pink":
                         resultMessage = "Pink"
-                        resultExplain = ""
+                        resultExplain = "PINK - The color of softness and love, it creates a world of tenderness and compassion. \nComplement it with the purity of WHITE, the timeless elegance of NAVY, the mystery of BLACK, and the vibrancy of GREEN. \nIn this world, every shade embodies the sweetness of life."
                         break;
                     case "Skybue":
                         resultMessage = "Skyblue"
-                        resultExplain = ""
+                        resultExplain = "SKYBLUE - A color that mirrors the vast open skies, inviting you to explore the endless possibilities. \n Complement it with the soft tenderness of PINK, the pure simplicity of WHITE, the refreshing coolness of GREEN, the mystique of BLACK, and the freshness of MINT. \n In this world, every shade tells a story of tranquility and creativity."
                         break;
                     case "Brown":
                         resultMessage = "Brown"
-                        resultExplain = "Black is the good match for the brown"
+                        resultExplain = "Black is the good match for the brown. \nBROWN - The earthy warmth of brown envelops you in a cozy embrace. \nPair it with the pure simplicity of WHITE, the soft tenderness of PINK, the depth of BLUE, and the elegance of BLACK. \nIt's a world where every shade represents the comfort of home and the allure of nature."
                         break;
                     case "Mint":
                         resultMessage = "Mint"
@@ -232,16 +241,27 @@
                 var title = "<div class='" + prediction[0].className + "-color-title'>" + resultMessage + "</div>"
                 var explain = "<div class='color-explain pt-2'>" + resultExplain + "</div>"
                 $('.result-message').html(title + explain)
+                const data = []
+                const color_list = ["red", "orange", "yellow", "green", "blue", "navy", "purple", "black", "white", "gray"
+                    , "mint", "skyblue", "brown"]
                 for (let i = 0; i < maxPredictions; i++) {
                     const classPrediction =
-                        prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-                    labelContainer.childNodes[i].innerHTML = classPrediction;
+                        prediction[i].className + ": " + (prediction[i].probability.toFixed(2) * 100) + ' %';
+                    labelContainer.children[i].innerHTML = classPrediction;
+                    data.push({
+                        name: color_assign[i].className,
+                        value: (color_assign[i].probability * 100).toFixed(2),
+                        color: color_list[i]
+                    });
                 }
+                createBarChart(data);
+                console.log("Data:", data);
             }
         </script>
 
         <footer class="footer pt-5 container d-flex justify-content-center">
-            <p>&copy; <a href="https://gdsc.community.dev/beloit-college/">Buccaneers</a> 2023. All Rights Reserved. </p>
+            <p>&copy; <a href="https://gdsc.community.dev/beloit-college/">Buccaneers</a> 2023. All Rights Reserved.
+            </p>
         </footer>
 
     </body>
