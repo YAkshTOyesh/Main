@@ -11,7 +11,6 @@
 </head>
 
 <body>
-    <div>Teachable Machine Image Model</div>
     <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <div class="file-upload">
         <div class="image-upload-wrap">
@@ -22,13 +21,14 @@
         </div>
         <div class="file-upload-content">
             <img class="file-upload-image" id="color" src="#" alt="your image" />
+            <p class="result-message"></p>
+            <div id="label-container"></div>
             <div class="image-title-wrap">
-                <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                <button type="button" onclick="removeUpload()" class="remove-image">Use another photo <span
                         class="image-title">Uploaded Image</span></button>
             </div>
         </div>
     </div>
-    <div id="label-container"></div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script
         src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
@@ -64,6 +64,57 @@
             // predict can take in an image, video or canvas html element
             var image = document.getElementById("color");
             const prediction = await model.predict(image, false);
+            prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+            console.log(prediction[0].className);
+            var resultMessage;
+            switch (prediction[0].className) {
+                case "Red":
+                    resultMessage = "Red"
+                    break;
+                case "Orange":
+                    resultMessage = "Orange"
+                    break;
+                case "Yellow":
+                    resultMessage = "Yellow"
+                    break;
+                case "Green":
+                    resultMessage = "Green"
+                    break;
+                case "Blue":
+                    resultMessage = "Blue"
+                    break;
+                case "Navy":
+                    resultMessage = "Navy"
+                    break;
+                case "Purple":
+                    resultMessage = "Purple"
+                    break;
+                case "Black":
+                    resultMessage = "Black"
+                    break;
+                case "White":
+                    resultMessage = "White"
+                    break;
+                case "Gray":
+                    resultMessage = "Gray"
+                    break;
+                case "Pink":
+                    resultMessage = "Pink"
+                    break;
+                case "Skybue":
+                    resultMessage = "Skyblue"
+                    break;
+                case "Brown":
+                    resultMessage = "Brown"
+                    break;
+                case "Mint":
+                    resultMessage = "Mint"
+                    break;
+                default:
+                    resultMessage = "Can't Predict"
+                // code block
+            }
+            $('.result-message').html(resultMessage)
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
                     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
